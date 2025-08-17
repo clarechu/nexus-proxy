@@ -1,0 +1,7 @@
+### get repository
+GET http://localhost:9090/apis/v1/repository/alpine-proxy
+
+
+### get repository
+
+GET http://localhost:9090/apis/v1/repository/alpine-proxy/sa/sasas/sasas

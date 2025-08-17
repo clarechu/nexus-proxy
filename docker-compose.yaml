@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  nexus:
+    image: sonatype/nexus3:3.78.3-alpine 
+    container_name: nexus3
+    restart: always
+    ports:
+      - "8081:8081"  # Nexus Web UI 默认端口
+      - "5000:5000"  # 可选：Docker registry 端口
+    volumes:
+      - ./nexus-data:/nexus-data  # 持久化数据
+    networks:
+      - nexus-network
+
+networks:
+  nexus-network:
+    driver: bridge
