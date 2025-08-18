@@ -18,6 +18,7 @@ type Bootstrap interface {
 }
 
 type CMDB struct {
+	static    map[string]string
 	ctx       context.Context
 	cancel    context.CancelFunc
 	server    router.Server

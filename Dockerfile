@@ -18,6 +18,7 @@ FROM alpine AS runner
 
 ENV TZ=Asia/Shanghai
 ENV HOME=/home/cmdb
+ENV PATH=$PATH:/home/cmdb
 
 RUN mkdir -p $HOME && \
     apk --no-cache add ca-certificates tzdata && \
@@ -28,6 +29,6 @@ COPY --from=build /home/cmdb/nexus3-proxy $HOME/nexus-proxy
 
 WORKDIR /home/cmdb
 
-CMD ["./nexus3-proxy"]
+CMD ["nexus-proxy", "server"]
 
 

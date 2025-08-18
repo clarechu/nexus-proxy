@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Index of {{.Path}}</title>
+    <style>
+        body {
+            font-family: monospace;
+            padding: 20px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #000;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .dir {
+            color: #00f;
+        }
+
+        .size {
+            float: right;
+            opacity: 0.7;
+            margin-left: 20px;
+        }
+
+        .time {
+            float: right;
+            opacity: 0.7;
+            width: 160px;
+        }
+    </style>
+</head>
+<body>
+<h1>Index of {{.Path}}</h1>
+<hr>
+    <pre>
+    {{range .Entries}}<a href="{{.URL}}" class="dir">{{.Name}}{{if .IsDir}}/{{end}}</a>
+        <span class="time">{{.ModTime}}</span> <span class="size">{{.Size}}</span>
+    {{end}}
+    </pre>
+<hr>
+</body>
+</html>

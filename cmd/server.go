@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"embed"
 	"github.com/spf13/cobra"
 	"k8s.io/klog/v2"
 	"nexus3-fsnotify/src/server"
@@ -9,7 +10,7 @@ import (
 	"path/filepath"
 )
 
-func ServerCommand(args []string) *cobra.Command {
+func ServerCommand(staticAssets embed.FS, args []string) *cobra.Command {
 	config := &server.CmdbConfig{}
 	serverCommand := &cobra.Command{
 		Use:               "server",
@@ -19,7 +20,7 @@ func ServerCommand(args []string) *cobra.Command {
 		Long:              `The new generation of CMDB`,
 		Run: func(cmd *cobra.Command, args []string) {
 			klog.Info("cmdb start ...")
-
+			config.StaticAssets = staticAssets
 			if config.DataRoot == "" {
 				config.DataRoot = filepath.Join(homedir.HomeDir(), ".cmdb")
 			}

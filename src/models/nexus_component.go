@@ -11,6 +11,15 @@ type ExtComponentRequest struct {
 	TID    int      `json:"tid"` // Transaction ID
 }
 
+// LeafComponentRequest represents a generic Ext Direct RPC call
+type LeafComponentRequest struct {
+	Action string   `json:"action"`
+	Method string   `json:"method"`
+	Data   []string `json:"data"`
+	Type   string   `json:"type"`
+	TID    int      `json:"tid"` // Transaction ID
+}
+
 // ExtComponentResponse represents the outer Ext Direct RPC envelope
 type ExtComponentResponse struct {
 	TID    int             `json:"tid"`

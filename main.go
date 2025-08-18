@@ -1,6 +1,7 @@
 package main
 
 import (
+	"embed"
 	goflags "flag"
 	"github.com/spf13/pflag"
 	"k8s.io/klog/v2"
@@ -8,13 +9,8 @@ import (
 	"os"
 )
 
-var nexusPath = goflags.String("nexus-api", "http://localhost:8081",
-	"Nexus data path (required) nexus-data")
-
-//func main() {
-//	flag.Parse()
-//	klog.Infof("watch blobs path: %s", nexusPath)
-//}
+//go:embed static/**
+var staticAssets embed.FS
 
 func init() {
 	//	klog.InitFlags(nil)
@@ -22,7 +18,7 @@ func init() {
 }
 
 func main() {
-	rootCmd := cmd.GetRootCmd(os.Args[1:])
+	rootCmd := cmd.GetRootCmd(staticAssets, os.Args[1:])
 	if err := rootCmd.Execute(); err != nil {
 		klog.Error(err)
 		os.Exit(-1)
