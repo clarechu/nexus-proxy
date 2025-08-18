@@ -3,7 +3,7 @@ module nexus3-fsnotify
 go 1.24.4
 
 require (
-	github.com/clarechu/go-client v0.0.0-20250714025011-61738f5e50cd
+	github.com/clarechu/go-client v0.0.0-20250818142334-2273c5abbd92
 	github.com/emicklei/go-restful/v3 v3.13.0
 	github.com/spf13/cobra v1.9.1
 	github.com/spf13/pflag v1.0.7
