@@ -32,15 +32,16 @@ func (n *NexusRepository) Asset(request *restful.Request, response *restful.Resp
 	for i, p := range parts {
 		parts[i] = url.PathEscape(p)
 	}
+	response.Header().Set("Content-Disposition",
+		fmt.Sprintf("attachment; filename=\"%s\"", filepath.Base(path)))
 	encoded := strings.Join(parts, "/")
 	err = n.clientSet.Get().RequestURI(fmt.Sprintf("/repository/%s%s", repository, encoded)).
 		Stream(response.ResponseWriter)
 	if err != nil {
+		response.Header().Del("Content-Disposition")
 		response.WriteError(http.StatusBadRequest, fmt.Errorf(`{"message": "%s"}`, err.Error()))
 		return
 	}
-	response.Header().Set("Content-Disposition",
-		fmt.Sprintf("attachment; filename=\"%s\"", filepath.Base(path)))
 }
 
 func getAsset(clientSet *rest.RESTClient,

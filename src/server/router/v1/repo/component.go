@@ -34,6 +34,7 @@ func (n *NexusRepository) Component(request *restful.Request, response *restful.
 		err = n.clientSet.Get().RequestURI(fmt.Sprintf("/repository/%s/%s", repository, name)).
 			Stream(response.ResponseWriter)
 		if err != nil {
+			response.Header().Del("Content-Disposition")
 			response.WriteError(http.StatusBadRequest, fmt.Errorf(`{"message": "%s"}`, err.Error()))
 			return
 		}
